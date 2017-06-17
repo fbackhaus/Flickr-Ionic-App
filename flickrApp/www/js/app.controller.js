@@ -1,4 +1,4 @@
 angular.module('flickrApp')
-  .controller('AppCtrl', function($scope) {
- 
-  });
+  .controller('AppCtrl', function($scope) {
+
+  });

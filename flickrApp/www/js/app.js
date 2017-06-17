@@ -31,6 +31,15 @@ angular.module('flickrApp', ['ionic', 'chart.js'])
       controller: 'AppCtrl'
     })
     .state('app.buscar', {
+      url: '/buscar',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/buscar.html',
+          controller: 'buscarCtrl'
+        }
+      }
+    })
+    .state('app.bienvenido', {
       url: '/bienvenido',
       views: {
         'menuContent': {
