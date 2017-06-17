@@ -27,10 +27,10 @@ angular.module('flickrApp', ['ionic', 'chart.js'])
     .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'templates/menu.html',
+      templateUrl: 'templates/bienvenido.html',
       controller: 'AppCtrl'
     })
-    .state('app.bienvenido', {
+    .state('app.buscar', {
       url: '/bienvenido',
       views: {
         'menuContent': {
