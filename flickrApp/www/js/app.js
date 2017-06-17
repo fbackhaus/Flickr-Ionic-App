@@ -24,13 +24,22 @@ angular.module('flickrApp', ['ionic', 'chart.js'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+    .state('app', {
+      url: '/app',
+      abstract: true,
+      templateUrl: 'templates/menu.html',
+      controller: 'AppCtrl'
+    })
+    .state('app.bienvenido', {
+      url: '/bienvenido',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/bienvenido.html'
+        }
+      }
+    });
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  });
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/bienvenido');
 });
