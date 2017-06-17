@@ -18,7 +18,6 @@ white-space: normal;
 .overflow-scroll > .scroll.overscroll {
 position: static !important;
 }
-
-body{
-  background-image: url("img/fondo.jpg");
+ion-view{
+  background-image: url("../img/fondo.jpg");
 }
