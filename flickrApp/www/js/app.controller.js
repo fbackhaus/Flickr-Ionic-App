@@ -1,9 +1,11 @@
 angular.module('flickrApp')
-  .controller('AppCtrl', function($scope, directoriosSvc) {
+  .controller('AppCtrl', function($scope) {
+  	console.log("ENTRO EN EL CONTROLLER")
 
-    function cargarDirectorios() {
-      return directoriosSvc.getDirectorios().then(function(encuestas) {
-        $scope.directorios = directorios;
-      });
-    }
+    // function cargarDirectorios() {
+    // console.log("ENTRO AL CONTROLLER");
+    //   directoriosSvc.getDirectorios().then(function(directorios) {
+    //     $scope.directorios = directorios ;
+    //   });
+    // }
   });

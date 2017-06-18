@@ -3,12 +3,13 @@ angular.module('flickrApp')
   //
     var baseUrl = 'https://api.flickr.com/services/';
     var cliente = (window.device || { }).uuid || Math.random();
+    var apiKey = '6f1dc5de29ce7e71586824ede294c57c';
 
 
 
     this.getDirectorios = function() {
       var directorios = null;
-      return $http.get(baseUrl)
+      return $http.get(baseUrl )
         .then(function(respuesta) {
           return _.cloneDeep(respuesta.data.directorios);
         });

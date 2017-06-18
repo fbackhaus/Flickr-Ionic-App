@@ -21,32 +21,40 @@ angular.module('flickrApp', ['ionic'])
     }
   });
 })
-  .config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('app', {
-        url: '/app',
-        abstract: true, 
-        templateUrl: 'templates/bienvenido.html',
-        controller: 'AppCtrl'
-      })
-      .state('app.buscar', {
-        url: '/buscar',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/buscar.html',
-            controller: 'buscarCtrl'
-          }
-        }
-      });
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+  .state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl'
+  })
+  .state('app.bienvenido', {
+    url: '/bienvenido',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/bienvenido.html'
+      }
+    }
+  })
+  .state('app.buscar', {
+    url: '/buscar',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/buscar.html',
+        controller: 'buscarCtrl'
+      }
+    }
+  });
 
 
   // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/bienvenido');
+  $urlRouterProvider.otherwise('/app/bienvenido');
 })
 
 .config(function($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.headers.common = 'Content-Type: application/json';
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  }
+  $httpProvider.defaults.useXDomain = true;
+  $httpProvider.defaults.headers.common = 'Content-Type: application/json';
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}
 );
