@@ -42,11 +42,11 @@ angular.module('flickrApp', ['ionic'])
 
   // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/bienvenido');
-});
+})
 
 .config(function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.headers.common = 'Content-Type: application/json';
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }
-)
+);
