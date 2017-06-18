@@ -21,31 +21,23 @@ angular.module('flickrApp', ['ionic'])
     }
   });
 })
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-    .state('app', {
-      url: '/app',
-      abstract: true,
-      templateUrl: 'templates/bienvenido.html',
-      controller: 'AppCtrl'
-    })
-    .state('app.buscar', {
-      url: '/buscar',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/buscar.html',
-          controller: 'buscarCtrl'
+  .config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('app', {
+        url: '/app',
+        abstract: true, 
+        templateUrl: 'templates/bienvenido.html',
+        controller: 'AppCtrl'
+      })
+      .state('app.buscar', {
+        url: '/buscar',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/buscar.html',
+            controller: 'buscarCtrl'
+          }
         }
-      }
-    })
-    .state('app.bienvenido', {
-      url: '/bienvenido',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/bienvenido.html'
-        }
-      }
-    });
+      });
 
 
   // if none of the above states are matched, use this as the fallback

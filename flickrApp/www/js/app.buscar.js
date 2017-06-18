@@ -1,4 +1,5 @@
 angular.module('flickrApp')
-  .controller('buscarCtrl', function($scope) {
+.controller('buscarCtrl', function() {
   console.log('entro!!');
-  });
+
+});
