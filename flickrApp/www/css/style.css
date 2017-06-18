@@ -4,19 +4,19 @@
 padding: 0px !important;
 }
 .menu-item {
-padding-top: 1rem;
+  padding-top: 1rem;
 }
 .cover {
-display: block;
-margin-left: auto;
-margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .multiline {
-white-space: normal;
+  white-space: normal;
 }
 /* Arreglo para problema de ion-refresher en side menus */
 .overflow-scroll > .scroll.overscroll {
-position: static !important;
+  position: static !important;
 }
 ion-view{
   background-image: url("../img/fondo.jpg");

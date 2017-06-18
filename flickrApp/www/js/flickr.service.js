@@ -1,29 +1,30 @@
-angular.module('encuestasApp')
-  // .service('encuestasHttpSvc', function($q, $http) {
+angular.module('flickrApp')
+  .service('flickrHttpSvc', function($q, $http) {
   //
-  //   var baseUrl = 'https://api.flickr.com/services/';
-  //   var cliente = (window.device || { }).uuid || Math.random();
-  //
-  //
-  //
-  //   this.getEncuestas = function() {
-  //     var encuestas = null;
-  //     return $http.get(baseUrl)
-  //       .then(function(respuesta) {
-  //         return _.cloneDeep(respuesta.data.encuestas);
-  //       });
-  //   };
-  //
-  //   this.getEncuesta = function(id) {
-  //     return $http.get(baseUrl + id).then(function(respuesta) {
-  //       return _.cloneDeep(respuesta.data);
-  //     });
-  //   };
-  //
-  //   this.responder = function(id, respuestas) {
-  //     return $http.post(baseUrl + id + '/soluciones/' + cliente, { respuestas: respuestas });
-  //   };
-  // })
+    var baseUrl = 'https://api.flickr.com/services/';
+    var cliente = (window.device || { }).uuid || Math.random();
+
+
+
+    this.getDirectorios = function() {
+      var directorios = null;
+      return $http.get(baseUrl)
+        .then(function(respuesta) {
+          return _.cloneDeep(respuesta.data.directorios);
+        });
+    };
+
+    this.getDirectorios = function(id) {
+      return $http.get(baseUrl + id).then(function(respuesta) {
+        return _.cloneDeep(respuesta.data);
+      });
+    };
+
+    //NOSE SI HACE FALTA POSTEAR ALGO
+    this.responder = function(id, respuestas) {
+      return $http.post(baseUrl + id + '/blablablablJUDIO=JABONaqweqweqweqwlbla/' + cliente, { respuestas: respuestas });
+    };
+  })
 
   .service('flickrDbSvc', function($q, $ionicPlatform) {
     var db = null;
@@ -71,33 +72,33 @@ angular.module('encuestasApp')
     }
   })
 
-  // .service('directoriosSvc', function($q, , flickrDbSvc, conexion) {
-  //   var encuestas = null;
-  //   this.getEncuestas = function() {
-  //     if (conexion.online()) {
-  //       return encuestasHttpSvc.getEncuestas()
-  //         .then(function(respuesta) { encuestas = respuesta; })
-  //         .then(function() { flickrDbSvc.actualizarEncuestas(encuestas); })
-  //         .then(function() {
-  //           return _.cloneDeep(encuestas);
-  //         });
-  //     } else {
-  //       return encuestasDbSvc.getEncuestas();
-  //     }
-  //   };
-  //
-  //   this.getEncuesta = function(id) {
-  //     if (!conexion.online()) {
-  //       return $q.reject('Sin conexión');
-  //     }
-  //     return encuestasHttpSvc.getEncuesta(id);
-  //   };
-  //
-  //   this.responder = function(id, respuestas) {
-  //     if (!conexion.online()) {
-  //       return $q.reject('Sin conexión');
-  //     }
-  //     return encuestasHttpSvc.responder(id, respuestas);
-  //   };
-  }
-  );
+  .service('directoriosSvc', function($q, flickrHttpSvc, flickrDbSvc, conexion) {
+    var directorios = null;
+    this.getDirectorios = function() {
+      if (conexion.online()) {
+        return flickrHttpSvc.getDirectorios()
+          .then(function(respuesta) { directorios = respuesta; })
+          .then(function() { flickrDbSvc.actualizarDirectorios(directorios); })
+          .then(function() {
+            return _.cloneDeep(directorios);
+          });
+      } else {
+        return flickrDbSvc.getDirectorios();
+      }
+    };
+
+    this.getDirectorios = function(id) {
+      if (!conexion.online()) {
+        return $q.reject('Sin conexión');
+      }
+      return flickrHttpSvc.getDirectorios(id);
+    };
+
+    this.responder = function(id, respuestas) {
+      if (!conexion.online()) {
+        return $q.reject('Sin conexión');
+      }
+      return flickrHttpSvc.responder(id, respuestas);
+    };
+  });
+
