@@ -1,32 +1,25 @@
-<ion-view view-title="Welcome">
-
+<ion-view view-title="Welcome to judas v3.4">
+  <ion-nav-bar class="bar bar-header bar-dark">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content style="text-align: center;">
     <br/>
-    </ion-list class="menu-list">
-    <ion-item class="list" style="text-align: center;">
-
-      <a class="item item-avatar" href="#">
-        <img src="img/ionic.png">
-        <h2>Ver galeria</h2>
-        <p>Ingresa para ver la galeria que prefieras.</p>
-      </a>
-
-    </ion-item>
-    <ion-item class="list" style="text-align: center;">
+    </ion-list class="menu-list ">
+    <ion-item class="list list-home" style="text-align: center;">
       <a class="item item-avatar" href="#/app/buscar">
-        <img src="img/ionic.png">
-        <h2>Buscar usuario</h2>
-        <p>Traer id de usuario, para ver que ondara.</p>
+        <img src="img/search_people.jpg">
+        <h2>Primero necesitamos que nos digas que usuario quieres ver</h2>
+        <p>Haz click aquí para ingresar el usuario</p>
       </a>
 
     </ion-item>
-    <ion-item class="list" style="text-align: center;">
-
-      <a class="item item-avatar" href="#">
+    <ion-item class="list list-home" style="text-align: center;">
+      <a class="item item-avatar" href="#/app/directorios">
         <img src="img/ionic.png">
-        <h2>Venkman</h2>
-        <p>Back off, man. I'm a scientist.</p>
+        <h2>Quiero ver un directorio anterior</h2>
+        <p>Haz click aquí para ver el último directorio que visitaste</p>
       </a>
+
     </ion-item>
     </ion-list>
   </ion-content>

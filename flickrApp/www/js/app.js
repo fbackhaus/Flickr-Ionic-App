@@ -45,8 +45,23 @@ angular.module('flickrApp', ['ionic'])
         controller: 'buscarCtrl'
       }
     }
-  });
-
+  })
+    .state('app.lista_directorios', {
+      url: '/directorios',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/lista_directorios.html'
+        }
+      }
+    })
+    .state('app.ver_directorio', {
+      url: '/directorios/ver_directorio/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/ver_directorio.html'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/bienvenido');

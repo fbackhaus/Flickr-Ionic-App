@@ -23,15 +23,17 @@
       </ion-refresher>
       <!-- Listado de encuestas -->
       <ion-list class="menu-list">
-        <ion-item class="item" menu-close href="#/app/encuesta/{{encuesta.id}}" ng-repeat="encuesta in encuestas">
+        <ion-item class="item" menu-close href="#/app/buscar">
           <div class="row">
-            <div class="col col-75 menu-item">{{encuesta.nombre}}</div> 
-            <div class="col">
-              <a href="#/app/resultados/{{encuesta.id}}" class="button button-positive button-small button-block icon ion-stats-bars"></a>
-            </div>
-          </div> 
+            <div class="col col-75 menu-item">Buscar una persona</div>
+          </div>
+        </ion-item>
+        <ion-item class="item" menu-close href="#/app/bienvenido">
+          <div class="row">
+            <div class="col col-75 menu-item">Volver al menú</div>
+          </div>
         </ion-item>
       </ion-list>
-    </ion-content> 
+    </ion-content>
   </ion-side-menu>
 </ion-side-menus>

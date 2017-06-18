@@ -6,6 +6,14 @@ angular.module('flickrApp')
     var apiKey = '6f1dc5de29ce7e71586824ede294c57c';
 
 
+    this.getInfoUser = function() {
+      console.log('entró a la info del user');
+      var info_user = null;
+      return $http.get(baseUrl)
+        .then(function(respuesta) {
+          return _.cloneDeep(respuesta.data.info_user);
+        });
+    };
 
     this.getDirectorios = function() {
       var directorios = null;
@@ -100,6 +108,10 @@ angular.module('flickrApp')
         return $q.reject('Sin conexión');
       }
       return flickrHttpSvc.responder(id, respuestas);
+    };
+
+    this.getUser = function(){
+    console.log('AHORA ENTRO AJAJSKDJKASJD');
     };
   });
 

@@ -1,6 +1,6 @@
 angular.module('flickrApp')
   .controller('AppCtrl', function($scope) {
-  	console.log("ENTRO EN EL CONTROLLER")
+  	console.log("ENTRO EN EL CONTROLLER");
 
     // function cargarDirectorios() {
     // console.log("ENTRO AL CONTROLLER");
