@@ -46,9 +46,7 @@ angular.module('flickrApp')
       });
     });
 
-
-    //
-    // //Obtiene los sets desde la DB
+     //Obtiene los sets desde la DB
     this.getDirectorios = function() {
       return $q(function(resolve, reject) {
         db.executeSql("SELECT * FROM flickr", [],
@@ -109,8 +107,5 @@ angular.module('flickrApp')
       return flickrHttpSvc.responder(id, respuestas);
     };
 
-    this.getUser = function(){
-    console.log('AHORA ENTRO AJAJSKDJKASJD');
-    };
   });
 

@@ -13,4 +13,11 @@ angular.module('flickrApp')
 			return respuesta.data.user.id;
 		});
 	};
-});
+})
+
+  .service('flickrConnectionSvc', function($q, $http, conexion) {
+
+    this.estadoConexion = function() {
+      return conexion.online();
+    };
+  });

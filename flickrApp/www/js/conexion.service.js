@@ -1,7 +1,8 @@
 angular.module('flickrApp')
   .service('conexion', function($rootScope) {
 
-    function cambiarEstado(online) {
+    //nose para que usaríamos este método aún
+    this.cambiarEstado = function cambiarEstado(online) {
       $rootScope.$apply(function() {
         $rootScope.online = online;
       });
