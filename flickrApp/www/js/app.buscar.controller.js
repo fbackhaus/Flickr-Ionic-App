@@ -1,25 +1,31 @@
 angular.module('flickrApp')
-.controller('buscarCtrl', function($scope) {
+.controller('buscarCtrl', function($scope, flickrApiSvc, $ionicLoading) {
 
   $scope.titulo_busqueda = "Búsqueda";
   $scope.viendo_directorios = "Viendo directorio";
+  var userId;
 
-  $scope.submitBusqueda = function(directoriosSvc) {
-    //NO ESTOY PUDIENDO HACER QUE EL SERVICE directoriosSvc me lo importe en la function del controller
-    console.log('jojojojojojo');
-  //
-  //   return directoriosSvc.getUser();
-  //   hacerBusqueda();
-  //   // .then(function(info_user) {
-  //   //   $scope.info_user = info_user;
-  //   // });
-  //   //obtiene la lista de respuestas seleccionadas por el usuario
-  //   // return encuestasSvc.responder($scope.encuesta.id, calcularRespuestas())
-  //   //   .then(function mostrarResultados() {
-  //   //     $state.go('app.resultados', { id: $scope.encuesta.id });
-  //   //   });
-  };
-  // function hacerBusqueda(){
-  //   console.log('aca si');
-  // };
+
+  $scope.submit = function() {
+    console.log("ENTRA AL SUBMIT");
+    showIonicLoading()
+    .then(getDirectorios)
+    .then(function(_id) {
+        $scope.userId = _id;
+    })
+    .then($ionicLoading.hide);
+
+    // console.log($scope.userId);
+  }
+
+  function showIonicLoading() {
+    return $ionicLoading.show({
+      template: '<ion-spinner icon="lines"/>'
+    });
+  }
+
+  function getDirectorios() {
+    console.log(flickrApiSvc.getUserId($scope.inputVal));
+  }
+
 });

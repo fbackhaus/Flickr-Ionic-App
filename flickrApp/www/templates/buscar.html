@@ -2,20 +2,12 @@
   <ion-content padding="true">
     <!-- Busqueda -->
     <p>Ingresa el nombre de la persona que deseas buscar:</p>
-
+    <div ng-controller='buscarCtrl'>
     <div class="bar bar-header item-input-inset">
-      <label class="item-input-wrapper">
-        <i class="icon ion-ios-search placeholder-icon"></i>
-        <input type="search" placeholder="Ej:gabrielneil">
-      </label>
-      <button class="button button-clear">
-        Cancelar
-      </button>
+      <input type="search" placeholder="Ej:gabrielneil" ng-model="inputVal" required="true" />
     </div>
-
-    <!-- Boton:Submit -->
-    <button ng-click='getUserId()'
-            class="button button-positive button-full">Enviar</button>
-
+      <button ng-click='submit()'
+      class="button button-positive button-full">Enviar</button>
+    </div>
   </ion-content>
 </ion-view>

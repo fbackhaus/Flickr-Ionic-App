@@ -5,15 +5,6 @@ angular.module('flickrApp')
     var cliente = (window.device || { }).uuid || Math.random();
     var apiKey = '6f1dc5de29ce7e71586824ede294c57c';
 
-    this.getUserId = function(username) {
-      var uri = 'rest/?method=flickr.people.findByUsername&api_key=' + apiKey + '&username=' + username + '&format=json&nojsoncallback=1';
-        return $http.get(baseUrl + uri)
-        .then(function(respuesta) {
-          return _.cloneDeep(respuesta.user.id);
-        });
-    };
-
-
     this.getInfoUser = function() {
       console.log('entró a la info del user');
       var info_user = null;
