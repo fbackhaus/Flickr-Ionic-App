@@ -52,6 +52,7 @@ angular.module('flickrApp')
       .then(function(photos) {
         console.log(photos);
         getPhotoUrl(photos[0]);
+        getComments(photos[0].id);
       })
   }
 
@@ -59,6 +60,14 @@ angular.module('flickrApp')
     console.log(photo);
     var url = flickrApiSvc.getPhotoUrl(photo);
     console.log(url);
+  }
+
+  function getComments(photoId) {
+    console.log(photoId);
+    flickrApiSvc.getComments(photoId)
+    .then(function(comments) {
+      console.log(comments);
+    })
   }
 
 });

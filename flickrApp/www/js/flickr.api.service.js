@@ -35,4 +35,16 @@ angular.module('flickrApp')
   this.getPhotoUrl = function(photo) {
   	return _.cloneDeep('https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg');
   };
+
+  this.getComments = function(photoId) {
+    var uri = 'flickr.photos.comments.getList&api_key=' + apiKey + '&photo_id=' + photoId + '&format=json&nocallback=1';
+    console.log(baseUrl + uri);
+    return $http.get(baseUrl + uri)
+    .then(function(respuesta) {
+      var comments = respuesta.data;
+      var jsonData = JSON.parse(comments.substring(14,comments.length-1));
+      console.log(jsonData);
+      return _.cloneDeep(jsonData);
+    })
+  }
 });
