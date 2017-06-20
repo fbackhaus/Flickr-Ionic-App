@@ -13,6 +13,14 @@ angular.module('flickrApp')
 			return respuesta.data.user.id;
 		});
 	};
+
+  this.getDirectorios = function() {
+    var directorios = null;
+    return $http.get(baseUrl )
+      .then(function(respuesta) {
+        return _.cloneDeep(respuesta.data.directorios);
+      });
+  };
 })
 
   .service('flickrConnectionSvc', function($q, $http, conexion) {

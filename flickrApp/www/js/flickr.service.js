@@ -1,51 +1,25 @@
 angular.module('flickrApp')
-  .service('flickrHttpSvc', function($q, $http) {
-  //
-    var baseUrl = 'https://api.flickr.com/services/';
-    var cliente = (window.device || { }).uuid || Math.random();
-    var apiKey = '6f1dc5de29ce7e71586824ede294c57c';
-
-    this.getInfoUser = function() {
-      console.log('entró a la info del user');
-      var info_user = null;
-      return $http.get(baseUrl)
-        .then(function(respuesta) {
-          return _.cloneDeep(respuesta.data.info_user);
-        });
-    };
-
-    this.getDirectorios = function() {
-      var directorios = null;
-      return $http.get(baseUrl )
-        .then(function(respuesta) {
-          return _.cloneDeep(respuesta.data.directorios);
-        });
-    };
-
-    this.getDirectorios = function(id) {
-      return $http.get(baseUrl + id).then(function(respuesta) {
-        return _.cloneDeep(respuesta.data);
-      });
-    };
-
-    //NOSE SI HACE FALTA POSTEAR ALGO
-    this.responder = function(id, respuestas) {
-      return $http.post(baseUrl + id + '/blablablablJUDIO=JABONaqweqweqweqwlbla/' + cliente, { respuestas: respuestas });
-    };
-  })
 
   .service('flickrDbSvc', function($q, $ionicPlatform) {
     var db = null;
 
     //Abre la base de datos y crea las tablas si aun no existen
-    $ionicPlatform.ready(function() {
-      db = window.sqlitePlugin.openDatabase({name: "flickr.db", location: 'default'}, function() {
-        db.transaction(function(tx) {
-          tx.executeSql("CREATE TABLE IF NOT EXISTS flickr(id text primary key, url text)");
-        });
-      });
-    });
+    // $ionicPlatform.ready(function() {
+    //   db = window.sqlitePlugin.openDatabase({name: 'flickr.db', location: 'default'}, successcb, errorcb);
+    //
+    // db.transaction(function(transaction) {
+    //   transaction.executeSql('CREATE TABLE IF NOT EXISTS flickrDB (id integer primary key, url text)', [],
+    //     function(tx, result) {
+    //       alert("Table created successfully");
+    //     },
+    //     function(error) {
+    //       alert("Error occurred while creating the table.");
+    //     });
+    // }, db.close);
+    // });
 
+
+    var db = 
      //Obtiene los sets desde la DB
     this.getDirectorios = function() {
       return $q(function(resolve, reject) {
@@ -55,8 +29,9 @@ angular.module('flickrApp')
           },
           reject);
       });
-    };
 
+    };
+    //
     //Guarda la lista de directorios en la DB
     this.actualizarDirectorios = function(directorios) {
       var sqlStatments = [ "DELETE FROM flickr" ];
@@ -78,11 +53,11 @@ angular.module('flickrApp')
     }
   })
 
-  .service('directoriosSvc', function($q, flickrHttpSvc, flickrDbSvc, conexion) {
+  .service('directoriosSvc', function($q, flickrApiSvc, flickrDbSvc, conexion) {
     var directorios = null;
     this.getDirectorios = function() {
       if (conexion.online()) {
-        return flickrHttpSvc.getDirectorios()
+        return flickrApiSvc.getDirectorios()
           .then(function(respuesta) { directorios = respuesta; })
           .then(function() { flickrDbSvc.actualizarDirectorios(directorios); })
           .then(function() {
@@ -97,14 +72,14 @@ angular.module('flickrApp')
       if (!conexion.online()) {
         return $q.reject('Sin conexión');
       }
-      return flickrHttpSvc.getDirectorios(id);
+      return flickrApiSvc.getDirectorios(id);
     };
 
     this.responder = function(id, respuestas) {
       if (!conexion.online()) {
         return $q.reject('Sin conexión');
       }
-      return flickrHttpSvc.responder(id, respuestas);
+      return flickrApiSvc.responder(id, respuestas);
     };
 
   });
