@@ -46,22 +46,31 @@ angular.module('flickrApp', ['ionic'])
       }
     }
   })
-    .state('app.lista_directorios', {
-      url: '/directorios',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/lista_directorios.html'
-        }
+  .state('app.fotos', {
+    url: '/fotos',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/fotos.html',
+        controller: 'fotosCtrl'
       }
-    })
-    .state('app.ver_directorio', {
-      url: '/directorios/ver_directorio/:id',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/ver_directorio.html'
-        }
+    }
+  })
+  .state('app.lista_directorios', {
+    url: '/directorios',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/lista_directorios.html'
       }
-    });
+    }
+  })
+  .state('app.ver_directorio', {
+    url: '/directorios/ver_directorio/:id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ver_directorio.html'
+      }
+    }
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/bienvenido');
@@ -73,12 +82,12 @@ angular.module('flickrApp', ['ionic'])
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }
 )
-  .run(function asegurarPermisosNotificaciones() {
-    document.addEventListener('deviceReady', function() {
-      cordova.plugins.notification.local.hasPermission(function(notificacionesPermitidas) {
-        if (!notificacionesPermitidas) {
-          cordova.plugins.notification.local.registerPermission();
-        }
-      });
-    }, false);
-  });
+.run(function asegurarPermisosNotificaciones() {
+  document.addEventListener('deviceReady', function() {
+    cordova.plugins.notification.local.hasPermission(function(notificacionesPermitidas) {
+      if (!notificacionesPermitidas) {
+        cordova.plugins.notification.local.registerPermission();
+      }
+    });
+  }, false);
+});

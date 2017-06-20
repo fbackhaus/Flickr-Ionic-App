@@ -1,5 +1,5 @@
 angular.module('flickrApp')
-.controller('buscarCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc) {
+.controller('buscarCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
 
   $scope.titulo_busqueda = "Búsqueda";
   $scope.viendo_directorios = "Viendo directorio";
@@ -52,16 +52,20 @@ angular.module('flickrApp')
     console.log("GET PHOTOS");
       flickrApiSvc.getPhotos(photosetId, $scope.userId)
       .then(function(photos) {
-        console.log(photos);
-        getPhotoUrl(photos[0]);
-        getComments(photos[0].id);
+        var photosUrl = [];
+        photos.forEach(function(photo) {
+          photosUrl.push(getPhotoUrl(photo));
+        });
+        $rootScope.photos = photosUrl;
+        console.log(photosUrl);
+        $state.go('app.fotos');
+        // getComments(photos[0].id);
       })
   }
 
   function getPhotoUrl(photo) {
-    console.log(photo);
     var url = flickrApiSvc.getPhotoUrl(photo);
-    console.log(url);
+    return url;
   }
 
   function getComments(photoId) {

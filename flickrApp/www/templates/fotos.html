@@ -1,7 +1,10 @@
 <ion-view view-title="{{titulo_fotos}}">
   <ion-content padding="true">
     <!-- Busqueda -->
-    <div ng-controller='buscarCtrl'>
+    <div ng-controller='fotosCtrl'>
+      <div ng-repeat="photo in photos" ng-class="row | $index % 3 == 0">
+      <img ng-src="{{photo}}" />
       </div>
-    </ion-content>
-  </ion-view>
+    </div>
+  </ion-content>
+</ion-view>
