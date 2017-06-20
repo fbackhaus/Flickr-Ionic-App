@@ -3,6 +3,7 @@ angular.module('flickrApp')
 
   $scope.titulo_busqueda = "Búsqueda";
   $scope.viendo_directorios = "Viendo directorio";
+  $scope.titulo_fotos = "Fotos";
   var userId;
 
   $scope.submit = function() {
@@ -22,6 +23,7 @@ angular.module('flickrApp')
     if(conexion.online) {
       flickrApiSvc.getUserId($scope.inputVal)
       .then(function(id) {
+        $scope.userId = id;
         getDirectorios(id);
       })
     }
@@ -30,11 +32,12 @@ angular.module('flickrApp')
   function getDirectorios(userId) {
 
     if(conexion.online()){
-      console.log(userId);
       //esta conectado, pega a la api y con el id y trae
       flickrApiSvc.getDirectorios(userId)
       .then(function(photosets) {
-        getPhotos(photosets[0].id, userId)
+        $scope.photosets = photosets;
+        console.log("================");
+        console.log($scope.photosets);
       })
       //se rompe acá cuando quiero actulizar la bd obvio..
       // flickrDbSvc.actualizarDirectorios($scope.directorios);
@@ -45,10 +48,9 @@ angular.module('flickrApp')
     };
   }
 
-  function getPhotos(photosetId, userId) {
-      console.log(photosetId);
-      console.log(userId);
-      flickrApiSvc.getPhotos(photosetId, userId)
+  $scope.getPhotos = function(photosetId) {
+    console.log("GET PHOTOS");
+      flickrApiSvc.getPhotos(photosetId, $scope.userId)
       .then(function(photos) {
         console.log(photos);
         getPhotoUrl(photos[0]);
@@ -63,7 +65,6 @@ angular.module('flickrApp')
   }
 
   function getComments(photoId) {
-    console.log(photoId);
     flickrApiSvc.getComments(photoId)
     .then(function(comments) {
       console.log(comments);

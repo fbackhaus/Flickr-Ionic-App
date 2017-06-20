@@ -6,7 +6,6 @@ angular.module('flickrApp')
 
 	this.getUserId = function(username) {
 		var uri = 'flickr.people.findByUsername&api_key=' + apiKey + '&username=' + username + '&format=json&nojsoncallback=1';
-		console.log(baseUrl + uri);
 		return $http.get(baseUrl + uri)
 		.then(function(respuesta) {
 			return _.cloneDeep(respuesta.data.user.id);
@@ -16,7 +15,6 @@ angular.module('flickrApp')
   this.getDirectorios = function(userId) {
     //armar pegada con el user id
     var uri = 'flickr.photosets.getList&api_key=' + apiKey + '&user_id=' + userId + '&format=json&nojsoncallback=1';
-    console.log(baseUrl + uri);
     return $http.get(baseUrl + uri)
       .then(function(respuesta) {
         return _.cloneDeep(respuesta.data.photosets.photoset);
@@ -25,7 +23,6 @@ angular.module('flickrApp')
 
   this.getPhotos = function(photosetId, userId) {
   	var uri = 'flickr.photosets.getPhotos&api_key=' + apiKey + '&photoset_id=' + photosetId +'&user_id=' + userId + '&format=json&nojsoncallback=1';
-  	console.log(baseUrl + uri);
   	return $http.get(baseUrl + uri)
   		.then(function(respuesta) {
   			return _.cloneDeep(respuesta.data.photoset.photo);
@@ -38,12 +35,10 @@ angular.module('flickrApp')
 
   this.getComments = function(photoId) {
     var uri = 'flickr.photos.comments.getList&api_key=' + apiKey + '&photo_id=' + photoId + '&format=json&nocallback=1';
-    console.log(baseUrl + uri);
     return $http.get(baseUrl + uri)
     .then(function(respuesta) {
       var comments = respuesta.data;
       var jsonData = JSON.parse(comments.substring(14,comments.length-1));
-      console.log(jsonData);
       return _.cloneDeep(jsonData);
     })
   }
