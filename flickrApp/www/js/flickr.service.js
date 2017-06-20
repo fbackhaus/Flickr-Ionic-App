@@ -3,7 +3,7 @@ angular.module('flickrApp')
   .service('flickrDbSvc', function($q, $ionicPlatform) {
     var db = null;
 
-    //Abre la base de datos y crea las tablas si aun no existen
+    //Abre la base de datos y crea las tablas si aun no existen... se rompe por todos lados!!
     // $ionicPlatform.ready(function() {
     //   db = window.sqlitePlugin.openDatabase({name: 'flickr.db', location: 'default'}, successcb, errorcb);
     //

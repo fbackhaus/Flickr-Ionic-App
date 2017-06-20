@@ -14,18 +14,12 @@ angular.module('flickrApp')
 		});
 	};
 
-  this.getDirectorios = function() {
+  this.getDirectorios = function(user_id) {
+    //armar pegada con el user id
     var directorios = null;
     return $http.get(baseUrl )
       .then(function(respuesta) {
         return _.cloneDeep(respuesta.data.directorios);
       });
   };
-})
-
-  .service('flickrConnectionSvc', function($q, $http, conexion) {
-
-    this.estadoConexion = function() {
-      return conexion.online();
-    };
-  });
+});

@@ -72,4 +72,13 @@ angular.module('flickrApp', ['ionic'])
   $httpProvider.defaults.headers.common = 'Content-Type: application/json';
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }
-);
+)
+  .run(function asegurarPermisosNotificaciones() {
+    document.addEventListener('deviceReady', function() {
+      cordova.plugins.notification.local.hasPermission(function(notificacionesPermitidas) {
+        if (!notificacionesPermitidas) {
+          cordova.plugins.notification.local.registerPermission();
+        }
+      });
+    }, false);
+  });

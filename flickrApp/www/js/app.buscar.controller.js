@@ -1,5 +1,5 @@
 angular.module('flickrApp')
-.controller('buscarCtrl', function($scope, flickrApiSvc, $ionicLoading, flickrConnectionSvc, flickrDbSvc) {
+.controller('buscarCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc) {
 
   $scope.titulo_busqueda = "Búsqueda";
   $scope.viendo_directorios = "Viendo directorio";
@@ -26,7 +26,7 @@ angular.module('flickrApp')
   function getDirectorios() {
 
     var id = flickrApiSvc.getUserId($scope.inputVal);
-    if(flickrConnectionSvc.estadoConexion()){
+    if(conexion.online()){
       //esta conectado, pega a la api y con el id y trae
       $scope.directorios = (id);
       //se rompe acá cuando quiero actulizar la bd obvio..
