@@ -1,12 +1,19 @@
 <ion-view view-title="{{titulo_fotos}}">
 	<ion-content padding="true">
-
+		<!-- Busqueda -->
 		<div ng-controller='fotosCtrl'>
-			<ks-swiper-container initial-slide="10" speed="2000" loop="true" show-nav-buttons="true" slides-per-view="5" space-between="3" pagination-clickable="true" override-parameters="{effect: 'coverflow',coverflow: {rotate: 50,stretch: 0,depth: 100,modifier: 1,slideShadows : false}}"  on-ready="onReadySwiper(swiper)" style="position: bottom: true">
-				<ks-swiper-slide class="swiper-slide" ng-repeat="photo in photos">
-					<img ng-src="{{photo}}" width="100%">
-				</ks-swiper-slide>            
-			</ks-swiper-container>  
-		</div>
-	</ion-content>
+
+  <ks-swiper-container initial-slide="1" speed="2000" loop="true" show-nav-buttons="true" slides-per-view="1" space-between="3" pagination-clickable="false" override-parameters="{effect: 'coverflow',coverflow: {rotate: 50,stretch: 0,depth: 100,modifier: 1,slideShadows : false}}"  on-ready="onReadySwiper(swiper)">
+  <ks-swiper-slide class="swiper-slide" ng-repeat="photo in photos">
+  		<img ng-src="{{photo}}" width="100%">
+  	</ks-swiper-slide>            
+  </ks-swiper-container>
+
+  <ks-swiper-container initial-slide="3" speed="2000" loop="true" show-nav-buttons="false" slides-per-view="4" space-between="0" pagination-clickable="false"  on-ready="onReadySwiper(swiper)">
+  	<ks-swiper-slide class="swiper-slide" ng-repeat="photo in photos">
+  		<img ng-src="{{photo}}" width="100%">
+  	</ks-swiper-slide>            
+  </ks-swiper-container>          
+</div>
+</ion-content>
 </ion-view>
