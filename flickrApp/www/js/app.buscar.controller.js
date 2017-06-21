@@ -57,7 +57,7 @@ angular.module('flickrApp')
           photosUrl.push(getPhotoUrl(photo));
         });
         $rootScope.photos = photosUrl;
-        console.log(photosUrl);
+        console.log($rootScope.photos);
         $state.go('app.fotos');
         // getComments(photos[0].id);
       })
