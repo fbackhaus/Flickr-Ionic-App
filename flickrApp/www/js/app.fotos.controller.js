@@ -1,7 +1,7 @@
 angular.module('flickrApp')
 .controller('fotosCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
 	if($rootScope.photos == undefined) {
-		$state.go('app');
+		$state.go('app.bienvenido');
 	}
 
 $scope.swiper = {};
