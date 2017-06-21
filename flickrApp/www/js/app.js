@@ -90,4 +90,19 @@ angular.module('flickrApp', ['ionic', 'ksSwiper'])
       }
     });
   }, false);
-});
+})
+
+
+  .run(function mostrarNotificacionAlDesactivar($rootScope, conexion) {
+
+    //valida que no haya conexión en android y tira la notificación
+    if(!conexion.online()){
+      // cordova.plugins.notification.local.schedule({
+      //   id: 1,
+      //   title: "Hubo un problema con la conexión",
+      //   message: "Por favor revisa la conexión y  vuelve a intentarlo!",
+      //   at: new Date(new Date().getTime() + (1000 * 10)), //mostrar a los 10 segundos
+      //   icon: "file://img/ionic.png"
+      // });
+    }
+    });
