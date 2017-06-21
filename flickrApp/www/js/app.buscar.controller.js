@@ -38,9 +38,9 @@ angular.module('flickrApp')
         $scope.photosets = photosets;
         console.log("================");
         console.log($scope.photosets);
+        flickrDbSvc.actualizarDirectorios($scope.photosets, userId);
       })
       //se rompe acá cuando quiero actulizar la bd obvio..
-      // flickrDbSvc.actualizarDirectorios($scope.directorios);
 
     }else{
       //trae de la bd. Hay que validar que sea el mismo userId que el que tengo guardado en la bd.

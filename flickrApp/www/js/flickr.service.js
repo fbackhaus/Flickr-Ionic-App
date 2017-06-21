@@ -3,12 +3,12 @@ angular.module('flickrApp')
   .service('flickrDbSvc', function($q, $ionicPlatform) {
     var db = null;
 
-    //Abre la base de datos y crea las tablas si aun no existen... se rompe por todos lados!!
+    // Abre la base de datos y crea las tablas si aun no existen... se rompe por todos lados!!
     // $ionicPlatform.ready(function() {
     //   db = window.sqlitePlugin.openDatabase({name: 'flickr.db', location: 'default'}, successcb, errorcb);
-    //
+    
     // db.transaction(function(transaction) {
-    //   transaction.executeSql('CREATE TABLE IF NOT EXISTS flickrDB (id integer primary key, url text)', [],
+    //   transaction.executeSql('CREATE TABLE IF NOT EXISTS photosets (id long primary key, userId text, title text)', [],
     //     function(tx, result) {
     //       alert("Table created successfully");
     //     },
@@ -19,11 +19,11 @@ angular.module('flickrApp')
     // });
 
 
-    var db = 
+    var db = "";
      //Obtiene los sets desde la DB
     this.getDirectorios = function() {
       return $q(function(resolve, reject) {
-        db.executeSql("SELECT * FROM flickr", [],
+        db.executeSql("SELECT * FROM photosets", [],
           function(resultado) {
             resolve(rows(resultado));
           },
@@ -33,10 +33,12 @@ angular.module('flickrApp')
     };
     //
     //Guarda la lista de directorios en la DB
-    this.actualizarDirectorios = function(directorios) {
+    this.actualizarDirectorios = function(directorios, userId) {
+      console.log("=====SERVICE======");
+      console.log(directorios);
       var sqlStatments = [ "DELETE FROM flickr" ];
-      directorios.forEach(function(directorios) {
-        sqlStatments.push([ "INSERT INTO flickr(id, url) VALUES(?, ?)", [ directorios.id, directorios.url] ]);
+      directorios.forEach(function(photoset) {
+        // sqlStatments.push([ "INSERT INTO photosets(id, userId, title) VALUES(?, ?, ?)", [ photoset.id, userId, photoset.title._content] ]);
       });
 
       return $q(function(resolve, reject) {
