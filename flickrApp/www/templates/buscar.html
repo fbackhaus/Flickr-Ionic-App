@@ -8,17 +8,6 @@
       </div>
       <button ng-click='submit()'
       class="button button-positive button-full">Enviar</button>
-      <table style="width:100%" ng-show="(photosets | filter:criteria).length" >
-        <th>Titulo</th>
-        <th>Fotos</th>
-        <th>Seleccionar</th>
-        <tr ng-repeat="photoset in photosets">
-          <td>{{ photoset.title._content }}</td>
-          <td>{{ photoset.photos }}</td>
-          <td> <button ion-button color="secondary" ng-click='getPhotos(photoset.id)' 
-          class="button button-positive button-full" style="background-color: #4CAF50">Ver Fotos</button></td>
-          </tr>
-        </table>
-      </div>
-    </ion-content>
-  </ion-view>
+    </div>
+  </ion-content>
+</ion-view>

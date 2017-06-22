@@ -1,14 +1,10 @@
-<ion-view view-title="Lista de directorios">
+<ion-view view-title="{{titulo_fotos}}">
   <ion-content padding="true">
-    <!-- Busqueda -->
-    <p>Acá se van a ver los directorios que se cargaron previamente</p>
-    <div class="list">
-
-      <a class="item item-thumbnail-left" href="#/app/directorios/ver_directorio/12">
-        <img src="img/ionic.png">
-        <h2>Directorio 1</h2>
-        <p>Ingresa al directorio 1</p>
-      </a>
-    </div>
-  </ion-content>
-</ion-view>
+    <div ng-controller='directoriosCtrl'>
+      <ul class="list">
+        <li class="item" ng-repeat="photoset in photosets" ng-click='getPhotos(photoset.id)'>
+          {{ photoset.title._content }}
+        </li>
+      </ul>
+    </ion-content>
+  </ion-view>

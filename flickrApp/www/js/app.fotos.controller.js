@@ -1,20 +1,13 @@
 angular.module('flickrApp')
 .controller('fotosCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
-	if($rootScope.photos == undefined) {
+	if($rootScope.galleryPhotos == undefined) {
 		$state.go('app.bienvenido');
 	}
 
-$scope.swiper = {};
- 
-    $scope.onReadySwiper = function (swiper) {
- 
-        swiper.on('slideChangeStart', function () {
-            console.log('slide start');
-        });
-         
-        swiper.on('onSlideChangeEnd', function () {
-            console.log('slide end');
-        });     
-    };
-
+    function getComments(photoId) {
+        flickrApiSvc.getComments(photoId)
+        .then(function(comments) {
+            console.log(comments);
+        })
+    }
 });

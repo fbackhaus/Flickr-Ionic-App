@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('flickrApp', ['ionic', 'ksSwiper'])
+angular.module('flickrApp', ['ionic','ion-gallery'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -37,6 +37,14 @@ angular.module('flickrApp', ['ionic', 'ksSwiper'])
       }
     }
   })
+    .state('app.directorios', {
+    url: '/directorios',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/lista_directorios.html'
+      }
+    }
+  })
   .state('app.buscar', {
     url: '/buscar',
     views: {
@@ -52,14 +60,6 @@ angular.module('flickrApp', ['ionic', 'ksSwiper'])
       'menuContent': {
         templateUrl: 'templates/fotos.html',
         controller: 'fotosCtrl'
-      }
-    }
-  })
-  .state('app.lista_directorios', {
-    url: '/directorios',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/lista_directorios.html'
       }
     }
   })
