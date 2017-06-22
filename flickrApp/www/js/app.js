@@ -91,8 +91,8 @@ angular.module('flickrApp', ['ionic','ion-gallery'])
     });
   }, false);
 })
-  
-  .run(function($ionicPlatform, $ionicPopup) {
+
+  .run(function($ionicPlatform, conexion) {
     $ionicPlatform.ready(function() {
       if(window.Connection) {
         if(navigator.connection.type == Connection.NONE) {
@@ -101,10 +101,11 @@ angular.module('flickrApp', ['ionic','ion-gallery'])
             id: 1,
             title: "Hubo un problema con la conexión",
             message: "Por favor revisa la conexión y  vuelve a intentarlo!",
-            at: new Date(new Date().getTime() + (1000 * 10)), //mostrar a los 10 segundos
-            icon: "file://img/ionic.png"
+            at: new Date(new Date().getTime() + (1000 * 5)), //mostrar a los 10 segundos
+            icon: "file://img/wifi-issues.jpg "
           });
         }
       }
     });
+    conexion.setIonicPlatform($ionicPlatform);
   });

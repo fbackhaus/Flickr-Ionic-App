@@ -43,6 +43,7 @@ angular.module('flickrApp')
 
     }else{
       //trae de la bd. Hay que validar que sea el mismo userId que el que tengo guardado en la bd.
+      conexion.showNotOnline();
       $scope.directorios = flickrDbSvc.getDirectorios();
     };
   }
