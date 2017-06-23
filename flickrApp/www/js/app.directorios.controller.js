@@ -19,7 +19,11 @@ angular.module('flickrApp')
 			$state.go('app.fotos');
         // getComments(photos[0].id);
     })
-	}
+	};
+
+  $scope.ordenar = function(orderValue){
+    console.log('el orden es'+ orderValue);
+  };
 
 	function getPhotoUrl(photo) {
 		var url = flickrApiSvc.getPhotoUrl(photo);
