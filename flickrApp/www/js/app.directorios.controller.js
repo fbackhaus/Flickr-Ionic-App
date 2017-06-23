@@ -8,7 +8,7 @@ angular.module('flickrApp')
 			var jsonText = "[";
 			photos.forEach(function(photo) {
 				var title = photo.title.replace(/["']/g, "");
-				var text = '{ "src" :"' + getPhotoUrl(photo) + '",' + '"sub" : "' + title + '"},';
+				var text = '{ "src" :"' + getPhotoUrl(photo) + '",' + '"sub" : "' + title + '",' + '"id" : "' + photo.id +'"},';
 				jsonText += text;
 			});
 			jsonText = jsonText.substring(0, jsonText.length -1);
