@@ -1,0 +1,13 @@
+<ion-view view-title="{{photoSetName}}">
+  <ion-content padding="true">
+    <div ng-controller='fotosCtrl'>
+      <div class="list">
+        <ul class="list">
+          <li class="item" ng-repeat="photo in galleryPhotos" >
+            {{ photo.sub }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
