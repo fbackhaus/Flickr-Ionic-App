@@ -38,7 +38,7 @@ angular.module('flickrApp')
     this.recuperarUserId = function () {
       return window.localStorage.getItem('userId');
     }
-    
+
 
 
     /*

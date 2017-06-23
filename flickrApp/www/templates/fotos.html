@@ -1,7 +1,7 @@
-<ion-view view-title="{{titulo_fotos}}">
+<ion-view view-title="{{photoSetName}}">
 	<ion-content padding="true">
 		<div ng-controller='fotosCtrl'>
-			<ion-gallery ion-gallery-items="galleryPhotos" ion-item-callback="showPhoto(item)"></ion-gallery>    
+			<ion-gallery ion-gallery-items="galleryPhotos" ion-item-callback="showPhoto(item)"></ion-gallery>
 		</div>
 
 		<script id="image-modal.html" type="text/ng-template">
@@ -17,7 +17,7 @@
 					<div class="modal-dialog" style="max-height:85%;  margin-top: 50px; margin-bottom:50px;">
 						<ion-scroll zooming = "true" direction = "xy" style = "width: 320px; height: 500px">
 							<div class = "scroll-container">
-								<div class="modal-content"> 
+								<div class="modal-content">
 									<div class="modal-body">
 										<div class="scrollme" ng-scrollbar>
 											<div class="card" ng-repeat="comment in comments">

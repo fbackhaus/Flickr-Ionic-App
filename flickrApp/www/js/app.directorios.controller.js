@@ -2,23 +2,24 @@ angular.module('flickrApp')
   .controller('directoriosCtrl', function ($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
       $ionicLoading.hide();
       if ($rootScope.photosets == undefined) {
-        if(flickrDbSvc.recuperarUserId()!= null){
+        if (flickrDbSvc.recuperarUserId() != null) {
           console.log('cargo de la db');
           $rootScope.photosets = flickrDbSvc.recuperarDirectorios();
           $rootScope.userId = flickrDbSvc.recuperarUserId();
-          $rootScope.userName=flickrDbSvc.recuperarUserName();
-          console.log($rootScope.userName+' username ');
-          console.log($rootScope.userId+'  userid');
+          $rootScope.userName = flickrDbSvc.recuperarUserName();
+          console.log($rootScope.userName + ' username ');
+          console.log($rootScope.userId + '  userid');
 
-        }else{
+        } else {
           console.log('no hay nada');
           $state.go('app.bienvenido');
         }
 
       }
-      $scope.getPhotos = function (photosetId) {
+      $scope.getPhotos = function (photosetId, photosetName) {
         $rootScope.showIonicLoading();
         console.log(photosetId);
+        $rootScope.photoSetName=photosetName;
         if (window.Connection) {
           if (navigator.connection.type != Connection.NONE) {
             console.log("tengo conexion")
@@ -37,7 +38,6 @@ angular.module('flickrApp')
                 var galleryPhotos = JSON.parse(jsonText);
                 $rootScope.galleryPhotos = galleryPhotos;
                 console.log($rootScope.galleryPhotos);
-                //flickrDbSvc.
                 flickrDbSvc.guardarFotos(photosetId, galleryPhotos);
                 $rootScope.photosetId = photosetId;
                 $state.go('app.fotos');
@@ -53,11 +53,19 @@ angular.module('flickrApp')
               // $rootScope.userId = flickrDbSvc.recuperarUserId();
               // $rootScope.userName = flickrDbSvc.recuperarUserName();
               // $rootScope.photosets = flickrDbSvc.recuperarDirectorios($rootScope.userId);
-              if(!flickrDbSvc.recuperarFotos(photosetId)){
-
-              }else{
+              if (!flickrDbSvc.recuperarFotos(photosetId)) {
+                swal({
+                  title: "No tenes almacenado el photoset!",
+                  text: "Sorry!",
+                  //imageUrl: "img/disappointment-sad.png",
+                  timer: 2000,
+                  showConfirmButton: false
+                });
+                $ionicLoading.hide();
+                $state.go('app.bienvenido');
+              } else {
                 $rootScope.galleryPhotos = flickrDbSvc.recuperarFotos(photosetId);
-              $state.go('app.fotosSinConexion');
+                $state.go('app.fotosSinConexion');
               }
             }
           }

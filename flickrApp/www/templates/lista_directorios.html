@@ -1,4 +1,4 @@
-<ion-view view-title="{{titulo_fotos}}">
+<ion-view view-title="{{userName}}">
   <ion-content padding="true">
     <div ng-controller='directoriosCtrl'>
       <div class="list">
@@ -15,7 +15,7 @@
 
       </div>
       <ul class="list">
-        <li class="item" ng-repeat="photoset in photosets" ng-click='getPhotos(photoset.id)'>
+        <li class="item" ng-repeat="photoset in photosets" ng-click='getPhotos(photoset.id, photoset.title._content)'>
           {{ photoset.title._content }}
         </li>
       </ul>
