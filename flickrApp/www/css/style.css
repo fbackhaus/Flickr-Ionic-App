@@ -1,0 +1,70 @@
+/* Empty. Add your own CSS if you like */
+
+.menu-list .item-content {
+	padding: 0px !important;
+}
+.menu-item {
+	padding-top: 1rem;
+}
+.cover {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.multiline {
+	white-space: normal;
+}
+/* Arreglo para problema de ion-refresher en side menus */
+.overflow-scroll > .scroll.overscroll {
+	position: static !important;
+}
+ion-view{
+	background-image: url("../img/fondo.jpg");
+}
+.transparent {
+	background: transparent !important;
+}
+.image-modal {
+	width: 100% !important;
+	height: 100%;
+	top: 0 !important;
+	left: 0 !important;
+}
+.comments-modal {
+	width: 100% !important;
+	height: 50%;
+	margin: auto;
+/*	top: 0 !important;
+	left: 0 !important;*/
+}
+.fullscreen-image {
+	max-width: 100%;
+	max-height: 100%;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	overflow: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+.modal-dialog{
+	overflow-y: initial !important
+}
+.modal-body{
+	height: 500px;
+	overflow-y: auto;
+}
+
+/* Fix modal backdrop for smaller devices */
+@media (max-width: 679px) {
+	.active .modal-backdrop-bg {
+		opacity: .5;
+	}
+	.modal-backdrop-bg {
+		-webkit-transition: opacity 300ms ease-in-out;
+		transition: opacity 300ms ease-in-out;
+		background-color: #000;
+		opacity: 0;
+	}
+}

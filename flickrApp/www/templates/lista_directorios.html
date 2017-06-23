@@ -1,0 +1,24 @@
+<ion-view view-title="{{titulo_fotos}}">
+  <ion-content padding="true">
+    <div ng-controller='directoriosCtrl'>
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Ordenar por
+          </div>
+          <select ng-model="orderValue" ng-change="ordenar(orderValue)">
+            <option selected>Nombre</option>
+            <option>Fecha</option>
+          </select>
+        </label>
+
+      </div>
+      <ul class="list">
+        <li class="item" ng-repeat="photoset in photosets" ng-click='getPhotos(photoset.id)'>
+          {{ photoset.title._content }}
+        </li>
+      </ul>
+      </div>
+    </ion-content>
+  </ion-view>
