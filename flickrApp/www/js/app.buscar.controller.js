@@ -24,6 +24,7 @@ angular.module('flickrApp')
       .then(function(id) {
         if(id != null) {
           $rootScope.userId = id;
+          $rootScope.userName=$scope.inputVal;
           getDirectorios(id);
         }
         else {
@@ -48,7 +49,9 @@ angular.module('flickrApp')
 
         $rootScope.photosets = photosets;
         if(photosets.length > 0) {
-          $state.go('app.directorios');  
+          flickrDbSvc.guardarDirectorios(userId, photosets);
+          $state.go('app.directorios');
+
         }
         else {
           swal({
@@ -60,7 +63,7 @@ angular.module('flickrApp')
           });
           $ionicLoading.hide();
         }
-        
+
         // flickrDbSvc.actualizarDirectorios($scope.photosets, userId);
       });
       //se rompe acá cuando quiero actulizar la bd obvio..
@@ -68,7 +71,7 @@ angular.module('flickrApp')
     }else{
       //trae de la bd. Hay que validar que sea el mismo userId que el que tengo guardado en la bd.
       conexion.showNotOnline();
-      $scope.directorios = flickrDbSvc.getDirectorios();
+      $scope.directorios = flickrDbSvc.recuperarDirectorios($rootScope.userId);
     };
   }
 
