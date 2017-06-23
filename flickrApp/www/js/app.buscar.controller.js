@@ -23,8 +23,13 @@ angular.module('flickrApp')
     if(conexion.online) {
       flickrApiSvc.getUserId($scope.inputVal)
       .then(function(id) {
-        $rootScope.userId = id;
-        getDirectorios(id);
+        if(id != null) {
+          $rootScope.userId = id;
+          getDirectorios(id);
+        }
+        else {
+          swal("Oops...", "That user does not exist!", "error");
+        }
       })
     }
   }
@@ -35,14 +40,26 @@ angular.module('flickrApp')
       //esta conectado, pega a la api y con el id y trae
       flickrApiSvc.getDirectorios(userId)
       .then(function(photosets) {
-
+        console.log(photosets);
         //Tiro cada titulo a tolowercase
         photosets.forEach(function(photo) {
           photo.title._content = photo.title._content.toLowerCase();
         });
 
         $rootScope.photosets = photosets;
-        $state.go('app.directorios');
+        if(photosets.length > 0) {
+          $state.go('app.directorios');  
+        }
+        else {
+          swal({
+            title: "The user you entered has no photosets!",
+            text: "Sorry!",
+            imageUrl: "img/disappointment-sad.png",
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+        
         // flickrDbSvc.actualizarDirectorios($scope.photosets, userId);
       });
       //se rompe acá cuando quiero actulizar la bd obvio..
