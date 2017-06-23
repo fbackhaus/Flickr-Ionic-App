@@ -8,7 +8,13 @@ angular.module('flickrApp')
 		var uri = 'flickr.people.findByUsername&api_key=' + apiKey + '&username=' + username + '&format=json&nojsoncallback=1';
 		return $http.get(baseUrl + uri)
 		.then(function(respuesta) {
-			return _.cloneDeep(respuesta.data.user.id);
+      console.log(respuesta);
+      if(respuesta.data.code != 1) {
+        return _.cloneDeep(respuesta.data.user.id);
+      }
+      else {
+        return null;
+      }
 		});
 	};
 

@@ -1,5 +1,5 @@
 angular.module('flickrApp')
-.controller('fotosCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, $state, $rootScope, $ionicModal) {
+.controller('fotosCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, $state, $rootScope, $ionicModal, $window) {
 	if($rootScope.galleryPhotos == undefined) {
 		$state.go('app.bienvenido');
 	}
@@ -56,7 +56,19 @@ angular.module('flickrApp')
     });
 
     $scope.openCommentsModal = function() {
-    	$scope.commentsModal.show();
+    	if($scope.comments != undefined && $scope.comments.length > 0) {
+    		$scope.commentsModal.show();	
+    	}
+    	else {
+    		swal({
+    			title: "This Picture has no comments!",
+    			text: "Sorry!",
+    			imageUrl: "img/disappointment-sad.png",
+    			timer: 2000,
+    			showConfirmButton: false
+    		});
+    	}
+    	
     };
 
     $scope.closeCommentsModal = function() {
