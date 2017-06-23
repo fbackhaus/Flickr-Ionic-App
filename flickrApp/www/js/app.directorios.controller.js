@@ -2,7 +2,18 @@ angular.module('flickrApp')
   .controller('directoriosCtrl', function ($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
       $ionicLoading.hide();
       if ($rootScope.photosets == undefined) {
-        $state.go('app.bienvenido');
+        if(flickrDbSvc.recuperarUserId()!= null){
+          console.log('cargo de la db');
+          $rootScope.photosets = flickrDbSvc.recuperarDirectorios();
+          $rootScope.userId = flickrDbSvc.recuperarUserId();
+          $rootScope.userName=flickrDbSvc.recuperarUserName();
+          console.log($rootScope.userName+' username ');
+          console.log($rootScope.userId+'  userid');
+
+        }else{
+          console.log('no hay nada');
+          $state.go('app.bienvenido');
+        }
 
       }
       $scope.getPhotos = function (photosetId) {
@@ -26,6 +37,7 @@ angular.module('flickrApp')
                 var galleryPhotos = JSON.parse(jsonText);
                 $rootScope.galleryPhotos = galleryPhotos;
                 console.log($rootScope.galleryPhotos);
+                //flickrDbSvc.
                 flickrDbSvc.guardarFotos(photosetId, galleryPhotos);
                 $rootScope.photosetId = photosetId;
                 $state.go('app.fotos');
@@ -33,13 +45,20 @@ angular.module('flickrApp')
               })
           }
           else {
-            if (flickrDbSvc.recuperarDirectorios($rootScope.userId) === null) {
+            if (flickrDbSvc.recuperarUserId() === null) {
               $state.go('app.bienvenido');
               console.log('No se almaceno el usuario');
             } else {
               console.log('Recupero del usuario');
-              $rootScope.photosets = flickrDbSvc.recuperarDirectorios($rootScope.userId);
+              // $rootScope.userId = flickrDbSvc.recuperarUserId();
+              // $rootScope.userName = flickrDbSvc.recuperarUserName();
+              // $rootScope.photosets = flickrDbSvc.recuperarDirectorios($rootScope.userId);
+              if(!flickrDbSvc.recuperarFotos(photosetId)){
+
+              }else{
+                $rootScope.galleryPhotos = flickrDbSvc.recuperarFotos(photosetId);
               $state.go('app.fotosSinConexion');
+              }
             }
           }
 

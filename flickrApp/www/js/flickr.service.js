@@ -2,12 +2,13 @@ angular.module('flickrApp')
 
   .service('flickrDbSvc', function ($q, $ionicPlatform) {
 
-    this.guardarDirectorios = function (userId, directorios) {
-      window.localStorage.setItem(userId.toString(), JSON.stringify(directorios));
+    this.guardarDirectorios = function (userName, directorios) {
+      window.localStorage.setItem('directorio', JSON.stringify(directorios));
+
     };
 
-    this.recuperarDirectorios = function (userId) {
-      return JSON.parse(window.localStorage.getItem(userId.toString()));
+    this.recuperarDirectorios = function () {
+      return JSON.parse(window.localStorage.getItem('directorio'));
     };
 
 
@@ -21,6 +22,23 @@ angular.module('flickrApp')
       return JSON.parse(window.localStorage.getItem(photosetId.toString()));
 
     };
+
+
+    this.guardarUserName = function (username) {
+      window.localStorage.setItem('username', username.toString());
+    }
+
+    this.recuperarUserName = function () {
+      return window.localStorage.getItem('username');
+    }
+
+    this.guardarUserId = function (userId) {
+      window.localStorage.setItem('userId', userId.toString());
+    }
+    this.recuperarUserId = function () {
+      return window.localStorage.getItem('userId');
+    }
+    
 
 
     /*

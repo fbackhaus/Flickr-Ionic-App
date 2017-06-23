@@ -33,7 +33,8 @@ angular.module('flickrApp', ['ionic','ion-gallery'])
     url: '/bienvenido',
     views: {
       'menuContent': {
-        templateUrl: 'templates/bienvenido.html'
+        templateUrl: 'templates/bienvenido.html',
+        controller: 'bienvenidoCtrl'
       }
     }
   })
