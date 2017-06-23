@@ -24,6 +24,7 @@ angular.module('flickrApp')
 	//ordena by name por ahora
   $scope.ordenar = function(orderValue){
     $rootScope.photosets.sort(function(a,b){
+      //si quiere cambiar por fecha, se agrega un parametro $opcionDeOrdenamiento y se reemplaza a title por esa variable
       var x = a.title._content < b.title._content? -1:1;
       return x;
     });
