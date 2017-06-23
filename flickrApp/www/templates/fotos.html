@@ -1,7 +1,15 @@
 <ion-view view-title="{{titulo_fotos}}">
 	<ion-content padding="true">
 		<div ng-controller='fotosCtrl'>
-      <ion-gallery ion-gallery-items="galleryPhotos"></ion-gallery>    
-    </div>
-  </ion-content>
+			<ion-gallery ion-gallery-items="galleryPhotos" ion-item-callback="callback(item)"></ion-gallery>    
+		</div>
+
+		<script id="image-modal.html" type="text/ng-template">
+			<div class="modal image-modal transparent" ng-click="closeModal()">
+				<ion-pane class="transparent">
+					<img ng-src="{{imageSrc}}" class="fullscreen-image" ng-click="holis()" />
+				</ion-pane>
+			</div>
+		</script>
+	</ion-content>
 </ion-view>
