@@ -35,10 +35,16 @@ angular.module('flickrApp')
       //esta conectado, pega a la api y con el id y trae
       flickrApiSvc.getDirectorios(userId)
       .then(function(photosets) {
+
+        //Tiro cada titulo a tolowercase
+        photosets.forEach(function(photo) {
+          photo.title._content = photo.title._content.toLowerCase();
+        });
+
         $rootScope.photosets = photosets;
         $state.go('app.directorios');
         // flickrDbSvc.actualizarDirectorios($scope.photosets, userId);
-      })
+      });
       //se rompe acá cuando quiero actulizar la bd obvio..
 
     }else{
