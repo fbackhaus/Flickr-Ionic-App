@@ -1,6 +1,11 @@
 angular.module('flickrApp')
 .controller('directoriosCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
+	$ionicLoading.hide();
+	if($rootScope.photosets == undefined) {
+		$state.go('app.bienvenido');
+	}
 	$scope.getPhotos = function(photosetId) {
+		$rootScope.showIonicLoading();
 		console.log(photosetId);
 		flickrApiSvc.getPhotos(photosetId, $rootScope.userId)
 		.then(function(photos) {
@@ -22,13 +27,13 @@ angular.module('flickrApp')
 	};
 
 	//ordena by name por ahora
-  $scope.ordenar = function(orderValue){
-    $rootScope.photosets.sort(function(a,b){
+	$scope.ordenar = function(orderValue){
+		$rootScope.photosets.sort(function(a,b){
       //si quiere cambiar por fecha, se agrega un parametro $opcionDeOrdenamiento y se reemplaza a title por esa variable
       var x = a.title._content < b.title._content? -1:1;
       return x;
-    });
-  };
+  });
+	};
 
 	function getPhotoUrl(photo) {
 		var url = flickrApiSvc.getPhotoUrl(photo);

@@ -8,13 +8,12 @@ angular.module('flickrApp')
 
   $scope.submit = function() {
     console.log("ENTRA AL SUBMIT");
-    showIonicLoading()
-    .then(getUserId)
-    .then($ionicLoading.hide);
+    $rootScope.showIonicLoading();
+    getUserId();
   };
 
-  function showIonicLoading() {
-    return $ionicLoading.show({
+  $rootScope.showIonicLoading = function () {
+    $ionicLoading.show({
       template: '<ion-spinner icon="lines"/>'
     });
   }
@@ -29,6 +28,7 @@ angular.module('flickrApp')
         }
         else {
           swal("Oops...", "That user does not exist!", "error");
+          $ionicLoading.hide();
         }
       })
     }
@@ -58,6 +58,7 @@ angular.module('flickrApp')
             timer: 2000,
             showConfirmButton: false
           });
+          $ionicLoading.hide();
         }
         
         // flickrDbSvc.actualizarDirectorios($scope.photosets, userId);

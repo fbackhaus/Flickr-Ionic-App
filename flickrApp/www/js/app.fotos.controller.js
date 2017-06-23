@@ -1,5 +1,6 @@
 angular.module('flickrApp')
 .controller('fotosCtrl', function($scope, flickrApiSvc, $ionicLoading, conexion, $state, $rootScope, $ionicModal, $window) {
+	$ionicLoading.hide();
 	if($rootScope.galleryPhotos == undefined) {
 		$state.go('app.bienvenido');
 	}
