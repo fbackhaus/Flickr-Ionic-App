@@ -27,7 +27,6 @@ angular.module('flickrApp', ['ionic','ion-gallery'])
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html'
-  //  controller: 'AppCtrl'
   })
   .state('app.bienvenido', {
     url: '/bienvenido',

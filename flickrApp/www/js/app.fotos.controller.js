@@ -38,7 +38,6 @@ angular.module('flickrApp')
 };
 
 $scope.showPhoto = function (item) {
-  console.log(item);
   $scope.imageSrc = item.src;
   $scope.imageSub = item.sub;
   $scope.imageId = item.id;
@@ -71,7 +70,6 @@ $scope.closeModal = function () {
     });
 
     $scope.$on('modal.shown', function () {
-      console.log('Modal is shown!');
     });
 
     function getComments(photoId) {
@@ -114,6 +112,5 @@ $scope.closeModal = function () {
     });
 
     $scope.$on('commentsModal.shown', function () {
-      console.log('Comments Modal is shown!');
     });
   });
