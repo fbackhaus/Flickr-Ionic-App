@@ -64,8 +64,8 @@ angular.module('flickrApp')
       }
       else {
         swal({
-          title: "This Picture has no comments!",
-          text: "Sorry!",
+          title: "Esta foto no tiene comentarios",
+          text: "Prueba con otra!",
           imageUrl: "img/disappointment-sad.png",
           timer: 2000,
           showConfirmButton: false

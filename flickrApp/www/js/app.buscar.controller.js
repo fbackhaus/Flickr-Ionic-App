@@ -1,56 +1,55 @@
 angular.module('flickrApp')
-  .controller('buscarCtrl', function ($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
+.controller('buscarCtrl', function ($scope, flickrApiSvc, $ionicLoading, conexion, flickrDbSvc, $state, $rootScope) {
 
-    $scope.titulo_busqueda = "Búsqueda";
-    $scope.viendo_directorios = "Viendo directorio";
-    $scope.titulo_fotos = "Fotos";
-    var userId;
+  $scope.titulo_busqueda = "Búsqueda";
+  $scope.viendo_directorios = "Viendo directorio";
+  $scope.titulo_fotos = "Fotos";
+  var userId;
 
-    $scope.submit = function () {
-      console.log("ENTRA AL SUBMIT");
-      $rootScope.showIonicLoading();
-      getUserId();
-    };
+  $scope.submit = function () {
+    console.log("ENTRA AL SUBMIT");
+    $rootScope.showIonicLoading();
+    getUserId();
+  };
 
 
-    function getUserId() {
-      if (window.Connection) {
-        if (navigator.connection.type != Connection.NONE) {
-          console.log('conexion buscar');
-          flickrApiSvc.getUserId($scope.inputVal)
-            .then(function (id) {
-              if (id != null) {
-                $rootScope.userId = id;
-                $rootScope.userName = $scope.inputVal;
+  function getUserId() {
+    if (window.Connection) {
+      if (navigator.connection.type != Connection.NONE) {
+        console.log('conexion buscar');
+        flickrApiSvc.getUserId($scope.inputVal)
+        .then(function (id) {
+          if (id != null) {
+            $rootScope.userId = id;
+            $rootScope.userName = $scope.inputVal;
 
-                getDirectorios(id);
-              }
-              else {
-                swal("Oops...", "That user does not exist!", "error");
-                $ionicLoading.hide();
-              }
-            })
-        }else{
-          swal({
-            title: "No tenes internet!",
-            text: "Sorry!",
-            //imageUrl: "img/disappointment-sad.png",
-            timer: 2000,
-            showConfirmButton: false
-          });
-          $ionicLoading.hide();
-          $state.go('app.bienvenido')
-        }
+            getDirectorios(id);
+          }
+          else {
+            swal("Oops...", "El usuario ingresado no existe!", "error");
+            $ionicLoading.hide();
+          }
+        })
+      }else{
+        $ionicLoading.hide();
+        $state.go('app.bienvenido');
+        swal({
+          title: "Revisa tu conexión a Internet!",
+          imageUrl: "img/internet.png",
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
     }
+  }
 
-    function getDirectorios(userId) {
+  function getDirectorios(userId) {
 
-      if (conexion.online()) {
+    if (conexion.online()) {
         //esta conectado, pega a la api y con el id y trae
         flickrApiSvc.getDirectorios(userId)
-          .then(function (photosets) {
-            console.log(photosets);
+        .then(function (photosets) {
+          console.log(photosets);
             //Tiro cada titulo a tolowercase
             photosets.forEach(function (photo) {
               photo.title._content = photo.title._content.toLowerCase();
@@ -66,8 +65,8 @@ angular.module('flickrApp')
             }
             else {
               swal({
-                title: "The user you entered has no photosets!",
-                text: "Sorry!",
+                title: "El usuario ingresado no tiene photsets!",
+                text: "Prueba con otro!",
                 imageUrl: "img/disappointment-sad.png",
                 timer: 2000,
                 showConfirmButton: false
