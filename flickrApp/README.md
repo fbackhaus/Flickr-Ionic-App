@@ -1,6 +1,8 @@
 Flickr APP
 =====================
 
+## Using this App
+
 This app is built with ionic framework, on top of Apache Cordova.
 
 First, clone the repo and make surte the `ionic` utility is installed.
@@ -11,23 +13,17 @@ After that, inside the repository folder run:
 $ cordova prepare
 ```
 
-## Using this project
-
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+Once it finished, run:
 
 ```bash
-$ npm install -g ionic
+$ npm install (it may require sudo)
 ```
 
-Then run: 
+If you have any trouble with this commands, check config.xml and package.json files and delete the next lines:
 
 ```bash
-$ ionic start myProject tabs
+<plugin name="de.appplant.cordova.plugin.local-notification" spec="git+https://github.com/katzer/cordova-plugin-local-notifications.git" />
+"cordova-plugin-app-event": "file:node_modules/cordova-plugin-app-event"
+"de.appplant.cordova.plugin.local-notification": "git+https://github.com/katzer/cordova-plugin-local-notifications.git",
+"de.appplant.cordova.plugin.local-notification": {},
 ```
-
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
-
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.

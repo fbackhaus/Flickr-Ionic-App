@@ -7,7 +7,6 @@ angular.module('flickrApp')
   var userId;
 
   $scope.submit = function () {
-    console.log("ENTRA AL SUBMIT");
     $rootScope.showIonicLoading();
     getUserId();
   };
@@ -16,7 +15,6 @@ angular.module('flickrApp')
   function getUserId() {
     if (window.Connection) {
       if (navigator.connection.type != Connection.NONE) {
-        console.log('conexion buscar');
         flickrApiSvc.getUserId($scope.inputVal)
         .then(function (id) {
           if (id != null) {
@@ -49,7 +47,6 @@ angular.module('flickrApp')
         //esta conectado, pega a la api y con el id y trae
         flickrApiSvc.getDirectorios(userId)
         .then(function (photosets) {
-          console.log(photosets);
             //Tiro cada titulo a tolowercase
             photosets.forEach(function (photo) {
               photo.title._content = photo.title._content.toLowerCase();
