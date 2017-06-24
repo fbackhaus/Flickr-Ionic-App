@@ -1,7 +1,15 @@
-Ionic App Base
+Flickr APP
 =====================
 
-A starting project for Ionic that optionally supports using custom SCSS.
+This app is built with ionic framework, on top of Apache Cordova.
+
+First, clone the repo and make surte the `ionic` utility is installed.
+
+After that, inside the repository folder run:
+
+```bash
+$ cordova prepare
+```
 
 ## Using this project
 
