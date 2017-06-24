@@ -6,6 +6,18 @@ angular.module('flickrApp')
   if ($rootScope.galleryPhotos == undefined) {
     $state.go('app.bienvenido');
   }
+  cordova.plugins.email.hasPermission(function (granted) {
+   if(!granted) {
+    swal({
+      title: "Selecciona una imagen y hazle swipe!",
+      text: "Hacia la derecha podrás ver los comentarios, hacia la izquierda podrás compartirla.",
+      type: "info",
+      showCancelButton: false,
+      closeOnConfirm: true
+    });
+    $scope.granted = granted;
+  }
+});
 
   $scope.share = function() {
     $scope.closeModal();
@@ -22,47 +34,43 @@ angular.module('flickrApp')
   };
 
   sendEmail = function() {
-  //   cordova.plugins.email.addAlias('gmail', 'com.google.android.gm');
-  
-  cordova.plugins.email.hasPermission(function (granted) {
-   if(!granted) {
-    cordova.plugins.email.requestPermission();
-  }
-});
-  cordova.plugins.email.open({
-    app: 'gmail',
+    if(!$scope.granted) {
+      cordova.plugins.email.requestPermission();
+    }
+    cordova.plugins.email.open({
+      app: 'gmail',
     subject:    "Mira esta foto que encontré en Flickr!", // subject of the email
     body: $scope.imageSrc
   });
-  
-};
 
-$scope.showPhoto = function (item) {
-  $scope.imageSrc = item.src;
-  $scope.imageSub = item.sub;
-  $scope.imageId = item.id;
-  $scope.openModal();
-  getComments($scope.imageId);
-}
+  };
 
-$scope.showComments = function () {
-  $scope.openCommentsModal();
-};
+  $scope.showPhoto = function (item) {
+    $scope.imageSrc = item.src;
+    $scope.imageSub = item.sub;
+    $scope.imageId = item.id;
+    $scope.openModal();
+    getComments($scope.imageId);
+  }
 
-$ionicModal.fromTemplateUrl('image-modal.html', {
-  scope: $scope,
-  animation: 'slide-in-up'
-}).then(function (modal) {
-  $scope.modal = modal;
-});
+  $scope.showComments = function () {
+    $scope.openCommentsModal();
+  };
 
-$scope.openModal = function () {
-  $scope.modal.show();
-};
+  $ionicModal.fromTemplateUrl('image-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
 
-$scope.closeModal = function () {
-  $scope.modal.hide();
-};
+  $scope.openModal = function () {
+    $scope.modal.show();
+  };
+
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
 
     //Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
