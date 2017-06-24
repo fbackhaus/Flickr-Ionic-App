@@ -8,7 +8,6 @@ angular.module('flickrApp')
 		var uri = 'flickr.people.findByUsername&api_key=' + apiKey + '&username=' + username + '&format=json&nojsoncallback=1';
 		return $http.get(baseUrl + uri)
 		.then(function(respuesta) {
-      console.log(respuesta);
       if(respuesta.data.code != 1) {
         return _.cloneDeep(respuesta.data.user.id);
       }
@@ -31,7 +30,6 @@ angular.module('flickrApp')
   	var uri = 'flickr.photosets.getPhotos&api_key=' + apiKey + '&photoset_id=' + photosetId +'&user_id=' + userId + '&format=json&nojsoncallback=1';
   	return $http.get(baseUrl + uri)
   		.then(function(respuesta) {
-        console.log(respuesta);
   			return _.cloneDeep(respuesta.data.photoset.photo);
   		});
   };

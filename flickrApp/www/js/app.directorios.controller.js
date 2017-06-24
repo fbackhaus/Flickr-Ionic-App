@@ -3,12 +3,9 @@ angular.module('flickrApp')
   $ionicLoading.hide();
   if ($rootScope.photosets == undefined) {
     if (flickrDbSvc.recuperarUserId() != null) {
-      console.log('cargo de la db');
       $rootScope.photosets = flickrDbSvc.recuperarDirectorios();
       $rootScope.userId = flickrDbSvc.recuperarUserId();
       $rootScope.userName = flickrDbSvc.recuperarUserName();
-      console.log($rootScope.userName + ' username ');
-      console.log($rootScope.userId + '  userid');
 
     } else {
       $state.go('app.bienvenido');
@@ -23,15 +20,12 @@ angular.module('flickrApp')
   }
   $scope.getPhotos = function (photosetId, photosetName) {
     $rootScope.showIonicLoading();
-    console.log(photosetId);
     $rootScope.photoSetName=photosetName;
     if (window.Connection) {
       if (navigator.connection.type != Connection.NONE) {
-        console.log("tengo conexion")
 
         flickrApiSvc.getPhotos(photosetId, $rootScope.userId)
         .then(function (photos) {
-          console.log(photos);
           var jsonText = "[";
           photos.forEach(function (photo) {
             var title = photo.title.replace(/["']/g, "");
@@ -42,7 +36,6 @@ angular.module('flickrApp')
           jsonText += "]";
           var galleryPhotos = JSON.parse(jsonText);
           $rootScope.galleryPhotos = galleryPhotos;
-          console.log($rootScope.galleryPhotos);
           flickrDbSvc.guardarFotos(photosetId, galleryPhotos);
           $rootScope.photosetId = photosetId;
           $state.go('app.fotos');
@@ -52,9 +45,7 @@ angular.module('flickrApp')
       else {
         if (flickrDbSvc.recuperarUserId() === null) {
           $state.go('app.bienvenido');
-          console.log('No se almaceno el usuario');
         } else {
-          console.log('Recupero del usuario');
               // $rootScope.userId = flickrDbSvc.recuperarUserId();
               // $rootScope.userName = flickrDbSvc.recuperarUserName();
               // $rootScope.photosets = flickrDbSvc.recuperarDirectorios($rootScope.userId);
