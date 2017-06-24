@@ -1,5 +1,5 @@
 angular.module('flickrApp')
-.controller('bienvenidoCtrl',function ($scope, flickrApiSvc, $ionicLoading, conexion, $state, $rootScope, $ionicModal, flickrDbSvc, $window){
+.controller('bienvenidoCtrl',function ($scope, $ionicLoading, $rootScope){
   $rootScope.showIonicLoading = function () {
     $ionicLoading.show({
       template: '<ion-spinner icon="lines"/>'

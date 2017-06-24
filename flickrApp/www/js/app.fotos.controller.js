@@ -1,39 +1,69 @@
 angular.module('flickrApp')
-  .controller('fotosCtrl', function ($scope, flickrApiSvc, $ionicLoading, conexion, $state, $rootScope, $ionicModal, flickrDbSvc, $window) {
+.controller('fotosCtrl', function ($scope, flickrApiSvc, $ionicLoading, $state, $rootScope, $ionicModal) {
+  setTimeout(function(){
     $ionicLoading.hide();
-    if ($rootScope.galleryPhotos == undefined) {
+  }, 2000);
+  if ($rootScope.galleryPhotos == undefined) {
+    $state.go('app.bienvenido');
+  }
 
-        $state.go('app.bienvenido');
-
-    }
-
-    $scope.showPhoto = function (item) {
-      console.log(item);
-      $scope.imageSrc = item.src;
-      $scope.imageSub = item.sub;
-      $scope.imageId = item.id;
-      $scope.openModal();
-      getComments($scope.imageId);
-    }
-
-    $scope.showComments = function () {
-      $scope.openCommentsModal();
-    };
-
-    $ionicModal.fromTemplateUrl('image-modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function (modal) {
-      $scope.modal = modal;
+  $scope.share = function() {
+    $scope.closeModal();
+    swal({
+      title: "Compartir?",
+      text: "Se enviará la foto por mail",
+      showCancelButton: true,
+      closeOnConfirm: true,
+      imageUrl: "img/email.png"
+    },
+    function(){
+      sendEmail();
     });
+  };
 
-    $scope.openModal = function () {
-      $scope.modal.show();
-    };
+  sendEmail = function() {
+  //   cordova.plugins.email.addAlias('gmail', 'com.google.android.gm');
+  
+  cordova.plugins.email.hasPermission(function (granted) {
+   if(!granted) {
+    cordova.plugins.email.requestPermission();
+  }
+});
+  cordova.plugins.email.open({
+    app: 'gmail',
+    subject:    "Mira esta foto que encontré en Flickr!", // subject of the email
+    body: $scope.imageSrc
+  });
+  
+};
 
-    $scope.closeModal = function () {
-      $scope.modal.hide();
-    };
+$scope.showPhoto = function (item) {
+  console.log(item);
+  $scope.imageSrc = item.src;
+  $scope.imageSub = item.sub;
+  $scope.imageId = item.id;
+  $scope.openModal();
+  getComments($scope.imageId);
+}
+
+$scope.showComments = function () {
+  $scope.openCommentsModal();
+};
+
+$ionicModal.fromTemplateUrl('image-modal.html', {
+  scope: $scope,
+  animation: 'slide-in-up'
+}).then(function (modal) {
+  $scope.modal = modal;
+});
+
+$scope.openModal = function () {
+  $scope.modal.show();
+};
+
+$scope.closeModal = function () {
+  $scope.modal.hide();
+};
 
     //Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
@@ -46,9 +76,9 @@ angular.module('flickrApp')
 
     function getComments(photoId) {
       flickrApiSvc.getComments(photoId)
-        .then(function (comments) {
-          $scope.comments = comments.comments.comment;
-        })
+      .then(function (comments) {
+        $scope.comments = comments.comments.comment;
+      })
     }
 
     $ionicModal.fromTemplateUrl('comments-modal.html', {
