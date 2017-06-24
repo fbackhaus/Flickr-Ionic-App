@@ -33,7 +33,8 @@ angular.module('flickrApp', ['ionic','ion-gallery'])
     url: '/bienvenido',
     views: {
       'menuContent': {
-        templateUrl: 'templates/bienvenido.html'
+        templateUrl: 'templates/bienvenido.html',
+        controller: 'bienvenidoCtrl'
       }
     }
   })
@@ -70,7 +71,16 @@ angular.module('flickrApp', ['ionic','ion-gallery'])
         templateUrl: 'templates/ver_directorio.html'
       }
     }
-  });
+  })
+    .state('app.fotosSinConexion',{
+      url: '/fotosSinConexion',
+      views:{
+        'menuContent':{
+          templateUrl: 'templates/fotosSinConexion.html',
+
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/bienvenido');
